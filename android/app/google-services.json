@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1086554158350",
+    "firebase_url": "https://flutter-rewahub.firebaseio.com",
+    "project_id": "flutter-rewahub",
+    "storage_bucket": "flutter-rewahub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086554158350:android:39de3694b2d203b77e935f",
+        "android_client_info": {
+          "package_name": "com.wiizb.rewahub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086554158350-levdcjm2n1qsni45kjc4sqrkhdlvi7au.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wiizb.rewahub",
+            "certificate_hash": "a0629b8f6fafa6018ad8000dce90bd4c372f1dde"
+          }
+        },
+        {
+          "client_id": "1086554158350-5d4iiif5cq9v0ut2dprrjeb6jlc920hb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCWXlkEwoRouQsKsSdcd6_q46gtzf4yvc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086554158350-5d4iiif5cq9v0ut2dprrjeb6jlc920hb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
