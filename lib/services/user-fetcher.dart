@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:rewahub/blocs/user-bloc.dart';
 import 'package:rewahub/models/user.dart';
-import 'package:rewahub/pages/dashboard.dart';
+import 'package:rewahub/views/main_page.dart';
+// import 'package:rewahub/pages/dashboard.dart';
+
 
 class UserFetcher extends StatefulWidget {
   final UserBloc userBloc;
@@ -27,5 +29,7 @@ class _UserFetcherState extends State<UserFetcher> {
   }
 
   @override
-  Widget build(BuildContext context) => Dashboard();
+  // Widget build(BuildContext context) => Dashboard();
+  Widget build(BuildContext context) => MainPage();
+
 }

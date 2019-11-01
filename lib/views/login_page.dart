@@ -1,16 +1,17 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rewahub/services/auth.dart';
-import 'package:rewahub/styles.dart';
+import 'package:rewahub/ui/styles/styles.dart';
+import 'package:rewahub/views/main_page.dart';
+import 'package:rewahub/views/pin_entry.dart';
 
-class Landing extends StatelessWidget {
-  final AuthService auth = AuthService();
-
+class LogInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
-      // title: 'Generated App',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
         primaryColor: const Color(0xFF2196f3),
@@ -30,8 +31,8 @@ class LogInPages extends StatefulWidget {
 
 class _LogInPageState extends State<LogInPages> {
   final AuthService auth = AuthService();
-  // final StreamController<bool> _verificationNotifier =
-  //     StreamController<bool>.broadcast();
+  final StreamController<bool> _verificationNotifier =
+      StreamController<bool>.broadcast();
   var email = TextEditingController();
   var pswd = TextEditingController();
   final FocusNode fnThree = FocusNode();
@@ -75,7 +76,6 @@ class _LogInPageState extends State<LogInPages> {
                         ),
                       ),
                     ]),
-
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     end: Alignment.topRight,
@@ -84,8 +84,6 @@ class _LogInPageState extends State<LogInPages> {
                     colors: [blushish, reddish],
                   ),
                 ),
-                // color: const Color(0xFFff0a0a),
-                // padding: const EdgeInsets.all(0.0),
                 alignment: Alignment.center,
                 width: 1.7976931348623157e+308,
               ),
@@ -93,11 +91,7 @@ class _LogInPageState extends State<LogInPages> {
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   padding: const EdgeInsets.all(0.0),
-                  child:
-
-                      // new SingleChildScrollView(
-                      // new Container(
-                      Padding(
+                  child: Padding(
                     padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0),
                     child: new Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -146,11 +140,8 @@ class _LogInPageState extends State<LogInPages> {
                             focusNode: fnFour,
                             onFieldSubmitted: (value) {
                               fnFour.unfocus();
-
-                              // _register();
                             },
                             keyboardType: TextInputType.visiblePassword,
-                            // style: style,
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.lock),
                               contentPadding:
@@ -160,10 +151,6 @@ class _LogInPageState extends State<LogInPages> {
                               hintText: "Enter Your Password",
                             ),
                             autofocus: false,
-                            // validator: validateMobile,
-                            // onSaved: (String val) {
-                            //   var _mobile = val;
-                            // },
                           ),
                         ),
                         Padding(
@@ -193,18 +180,15 @@ class _LogInPageState extends State<LogInPages> {
                           ),
                           child: MaterialButton(
                             padding: EdgeInsets.fromLTRB(80.0, 0.0, 80.0, 0.0),
-                            //  onPressed: isLoginButtonEnabled(state)
-                            //   ? _onFormSubmitted
-                            //   : null,
-                            // onPressed: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) => MainPage()),
-                              // );
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainPage()),
+                              );
 
-                              // _onClick();
-                            // },
+                              _onClick();
+                            },
                             child: Text(
                               "Log In",
                               textAlign: TextAlign.center,
@@ -237,9 +221,8 @@ class _LogInPageState extends State<LogInPages> {
                                 Color(0xFFff355d),
                               ],
                               iconData: FontAwesomeIcons.googlePlusG,
+                              // onPressed: () {},
                               onPressed: auth.handleGoogleSignin,
-                              // () {}
-                              
                             ),
                             SocialIcon(
                               colors: [
@@ -269,7 +252,7 @@ class _LogInPageState extends State<LogInPages> {
                               // Navigator.push(
                               //   context,
                               //   MaterialPageRoute(
-                              //       builder: (context) => CustRegPage(),),
+                              //       builder: (context) => CustRegPage()),
                               // );
                             },
                             child: Text(
@@ -293,47 +276,50 @@ class _LogInPageState extends State<LogInPages> {
     );
   }
 
-  // void buttonPressed() {}
+  void buttonPressed() {}
 
-  // void _onCancel() {}
+  void _onCancel() {}
 
-  // void _validCallback() {}
+  void _validCallback() {}
 
-  // void _onPasswordEntered(String text) {
-  //   print("Entered password is $text");
+  void _onPasswordEntered(String text) {
+    print("Entered password is $text");
 
-  //   if (text == "1234")
-  //     // Navigator.pop(context,text);
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => MainPage()),
-  //     );
-  //   else {
-  //     _verificationNotifier.add(false);
-  //   }
-  //   //    _verificationNotifier.add(event)
-  // }
+    if (text == "1234")
+      // Navigator.pop(context,text);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MainPage()),
+      );
+    else {
+      _verificationNotifier.add(false);
+    }
+    //    _verificationNotifier.add(event)
+  }
 
-  // _onClick() async {
-  //   var result = await Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //           builder: (context) => PinEntry(
-  //                 title: 'Enter Passcode',
-  //                 cancelCallback: _onCancel,
-  //                 deleteLocalizedText: 'Delete',
-  //                 cancelLocalizedText: 'Cancel',
-  //                 shouldTriggerVerification: _verificationNotifier.stream,
-  //                 passwordEnteredCallback: _onPasswordEntered,
-  //                 isValidCallback: _validCallback,
-  //               )));
+  _onClick() async {
+    var result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PinEntry(
+                  title: 'Enter Passcode',
+                  cancelCallback: _onCancel,
+                  deleteLocalizedText: 'Delete',
+                  cancelLocalizedText: 'Cancel',
+                  shouldTriggerVerification: _verificationNotifier.stream,
+                  passwordEnteredCallback: _onPasswordEntered,
+                  isValidCallback: _validCallback,
+                )));
 
-  //   print(result.runtimeType.toString());
-  //   print("result is $result");
-  // }
+    print(result.runtimeType.toString());
+    print("result is $result");
+  }
 }
+
 _fieldFocusChange(
     BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
   currentFocus.unfocus();
   FocusScope.of(context).requestFocus(nextFocus);
 }
+
+// }
