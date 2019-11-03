@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rewahub/services/auth.dart';
@@ -23,7 +24,12 @@ class Landing extends StatelessWidget {
 }
 
 class LogInPages extends StatefulWidget {
-  LogInPages({Key key}) : super(key: key);
+  UserRepository userRepo ;
+
+  LogInPages({Key key}) : super(key: key){
+
+    userRepo = UserRepository();
+  }
   @override
   _LogInPageState createState() => new _LogInPageState();
 }
@@ -193,6 +199,14 @@ class _LogInPageState extends State<LogInPages> {
                           ),
                           child: MaterialButton(
                             padding: EdgeInsets.fromLTRB(80.0, 0.0, 80.0, 0.0),
+                            onPressed: (){
+
+                              widget.userRepo.signInWithCredentials(email.text, pswd.text).then((val){
+
+                                print(val.user.displayName);
+                              });
+                              print("login button pressed  "+ email.text +" "+ pswd.text);
+                            },
                             //  onPressed: isLoginButtonEnabled(state)
                             //   ? _onFormSubmitted
                             //   : null,
@@ -237,8 +251,12 @@ class _LogInPageState extends State<LogInPages> {
                                 Color(0xFFff355d),
                               ],
                               iconData: FontAwesomeIcons.googlePlusG,
-                              onPressed: auth.handleGoogleSignin,
-                              // () {}
+                              onPressed:  () async{
+                              FirebaseUser user =    await auth.handleGoogleSignin();
+
+
+                              print(user);
+                              }
                               
                             ),
                             SocialIcon(
@@ -266,6 +284,16 @@ class _LogInPageState extends State<LogInPages> {
                           padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 30.0),
                           child: InkWell(
                             onTap: () {
+                              // Add this to sign up button of sign up screen to register user
+                              /*widget.userRepo.signUp(
+                                email: email.text, password: pswd.text
+                              ).then((val){
+                                if(val.user != null){
+                                    print(val.user.toString());
+                                  print("Logged In");
+                                }
+                              });*/
+
                               // Navigator.push(
                               //   context,
                               //   MaterialPageRoute(

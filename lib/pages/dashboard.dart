@@ -18,7 +18,7 @@ class Dashboard extends StatelessWidget {
             children: <Widget>[
               Text(snap.data.username),
               Text(snap.data.email),
-              Image.network(snap.data.imageUrl,),
+              Image.network(snap.data.imageUrl??'',),
               SizedBox(height: 20.0),
               RaisedButton(
                 child: Text('LOGOUT'),
