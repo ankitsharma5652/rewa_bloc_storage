@@ -244,7 +244,7 @@ class _LogInPageState extends State<LogInPages> {
                               FirebaseUser user = await auth.handleGoogleSignin();
 
 
-                              print(user);
+                              print("Firebase google user login "+ user.toString());
                               }
                               
                             ),

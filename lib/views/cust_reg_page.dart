@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rewahub/services/auth.dart';
 import 'package:rewahub/ui/styles/styles.dart';
 import 'package:rewahub/views/cust_id_page.dart';
 
@@ -54,6 +55,11 @@ class CustRegPage extends StatelessWidget {
 
 // Create a Form widget.
 class CustRegPageForm extends StatefulWidget {
+  UserRepository userRepo;
+
+  CustRegPageForm(){
+    userRepo = UserRepository();
+  }
   @override
   CustRegPageState createState() {
     return CustRegPageState();
@@ -308,10 +314,36 @@ class CustRegPageState extends State<CustRegPageForm> {
   }
 
   _register() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => CustIdPage()),
-    );
+    // Validate form field
+
+    var emailStr= email.text;
+    var passStr= pass.text;
+
+    if(emailStr.length == 0 || passStr.length < 6){
+
+      if(emailStr.length == 0)
+        email.clear();
+
+      if(passStr.length < 6)
+        pass.clear();
+
+      return;
+    }
+
+    widget.userRepo.signUp(
+      email: email.text,
+      password:  pass.text
+    ).then((val){
+      var user = val.user;
+
+      if(user != null){
+        print("sing up successful "+ user.email);
+        Navigator.pop(context);
+      }
+    });
+
+
+
   }
 }
 
